@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">GraphQL</string>
+    <string name="loading">loading</string>
+    <string name="protocol_error">Oh no… A protocol error happened</string>
+    <string name="no_data">no data found</string>
+    <string name="name">Name: %s</string>
+    <string name="rocket">Rocket: %s</string>
+    <string name="time">Time: %s</string>
+    <string name="twitter">Twitter: %s</string>
+    <string name="save">save</string>
+    <string name="delete">delete</string>
+    <string name="insert_error">user not inserted</string>
+    <string name="update_error">user not updated</string>
+    <string name="delete_error">user not deleted</string>
+</resources>

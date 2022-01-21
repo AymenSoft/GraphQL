@@ -1,0 +1,9 @@
+query UsersList($limit:Int!) {
+  users(limit: $limit, order_by: {timestamp: desc}) {
+    id
+    name
+    rocket
+    timestamp
+    twitter
+  }
+}
