@@ -1,6 +1,6 @@
 # GraphQL
 - simple application to show an exemple of using GraphQL with Kotlin
-- to get the tutorial, read <a href="https://aymenmsd.medium.com/" target="_blank">Meduim Article</a>
+- to get the tutorial, read <a href="https://aymenmsd.medium.com/android-kotlin-graphql-tutorial-eb0d85047ef9" target="_blank">Meduim Article</a>
 # Dependencies
 - start by implementing dependencies in build.gradle
 ```kotlin
