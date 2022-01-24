@@ -34,7 +34,7 @@ apollo {
 ```kotlin
 {
   "name": "Untitled GraphQL Schema",
-  "schemaPath": "schema.graphql",
+  "schemaPath": "schema.graphqls",
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
