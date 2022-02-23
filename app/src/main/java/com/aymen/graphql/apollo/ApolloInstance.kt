@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
  * */
 class ApolloInstance {
 
-    private var BASE_URL = "http://api.spacex.land/graphql/"
+    private val BASE_URL = "http://api.spacex.land/graphql/"
 
     private val httpClient : OkHttpClient by lazy {
         val httpLoggingInterceptor = HttpLoggingInterceptor()

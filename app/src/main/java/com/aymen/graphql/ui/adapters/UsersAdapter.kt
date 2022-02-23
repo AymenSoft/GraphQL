@@ -3,24 +3,21 @@ package com.aymen.graphql.ui.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aymen.graphql.R
 import com.aymen.graphql.UsersListQuery
+import com.aymen.graphql.databinding.ItemsUsersBinding
 
 /**
  * show list of users in recycler view
  * @author Aymen Masmoudi
  * */
 @SuppressLint("NotifyDataSetChanged")
-class UsersAdapter(listener: ClickListener) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
-
-    private var users: ArrayList<UsersListQuery.User>
+class UsersAdapter(listener: ClickListener) : RecyclerView.Adapter<UsersAdapter.UsersHolder>() {
 
     private lateinit var context: Context
-
+    private var users: ArrayList<UsersListQuery.User>
     private val listener: ClickListener
 
     init {
@@ -34,33 +31,28 @@ class UsersAdapter(listener: ClickListener) : RecyclerView.Adapter<UsersAdapter.
         notifyDataSetChanged()
     }
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view){
-        val tvName: TextView = view.findViewById(R.id.tv_name)
-        val tvRocket: TextView = view.findViewById(R.id.tv_rocket)
-        val tvTime: TextView = view.findViewById(R.id.tv_time)
-        val tvTwitter: TextView = view.findViewById(R.id.tv_twitter)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersHolder {
+        val binding = ItemsUsersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        this.context = parent.context
+        return UsersHolder(binding)
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.items_users, viewGroup, false)
-        context = viewGroup.context
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val user = users[position]
-
-        holder.tvName.text = String.format(context.resources.getString(R.string.name), user.name)
-        holder.tvRocket.text = String.format(context.resources.getString(R.string.rocket), user.rocket)
-        holder.tvTime.text = String.format(context.resources.getString(R.string.time), user.timestamp.toString())
-        holder.tvTwitter.text = String.format(context.resources.getString(R.string.twitter), user.twitter)
-
+    override fun onBindViewHolder(holder: UsersHolder, position: Int) {
+        holder.bind(position)
         holder.itemView.setOnClickListener { listener.onItemClickListener(position) }
-
     }
 
     override fun getItemCount() = users.size
+
+    inner class UsersHolder(private val binding: ItemsUsersBinding): RecyclerView.ViewHolder(binding.root){
+        fun bind(position: Int) {
+            val user = users[position]
+            binding.tvName.text = String.format(context.resources.getString(R.string.name), user.name)
+            binding.tvRocket.text = String.format(context.resources.getString(R.string.rocket), user.rocket)
+            binding.tvTime.text = String.format(context.resources.getString(R.string.time), user.timestamp.toString())
+            binding.tvTwitter.text = String.format(context.resources.getString(R.string.twitter), user.twitter)
+        }
+    }
 
     //detect item click
     interface ClickListener {
