@@ -17,10 +17,12 @@ import com.aymen.graphql.databinding.ItemsUsersBinding
 class UsersAdapter(listener: ClickListener) : RecyclerView.Adapter<UsersAdapter.UsersHolder>() {
 
     private lateinit var context: Context
+    private var selectedItemPosition: Int
     private var users: ArrayList<UsersListQuery.User>
     private val listener: ClickListener
 
     init {
+        selectedItemPosition = -1
         this.users = ArrayList()
         this.listener = listener
     }
@@ -39,7 +41,11 @@ class UsersAdapter(listener: ClickListener) : RecyclerView.Adapter<UsersAdapter.
 
     override fun onBindViewHolder(holder: UsersHolder, position: Int) {
         holder.bind(position)
-        holder.itemView.setOnClickListener { listener.onItemClickListener(position) }
+        holder.itemView.setOnClickListener {
+            selectedItemPosition = holder.adapterPosition
+            notifyDataSetChanged()
+            listener.onItemClickListener(position)
+        }
     }
 
     override fun getItemCount() = users.size
@@ -47,10 +53,16 @@ class UsersAdapter(listener: ClickListener) : RecyclerView.Adapter<UsersAdapter.
     inner class UsersHolder(private val binding: ItemsUsersBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(position: Int) {
             val user = users[position]
+
             binding.tvName.text = String.format(context.resources.getString(R.string.name), user.name)
             binding.tvRocket.text = String.format(context.resources.getString(R.string.rocket), user.rocket)
             binding.tvTime.text = String.format(context.resources.getString(R.string.time), user.timestamp.toString())
             binding.tvTwitter.text = String.format(context.resources.getString(R.string.twitter), user.twitter)
+
+            binding.tvName.setTextColor(context.getColor(
+                if (selectedItemPosition == position) R.color.black else android.R.color.darker_gray
+            ))
+
         }
     }
 

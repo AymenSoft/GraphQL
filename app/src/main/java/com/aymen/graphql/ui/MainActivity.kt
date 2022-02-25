@@ -1,5 +1,6 @@
 package com.aymen.graphql.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +24,7 @@ import com.aymen.graphql.databinding.ActivityMainBinding
  * add/update/refresh users list
  * @author Aymen Masmoudi
  * */
+@SuppressLint("NotifyDataSetChanged")
 class MainActivity : AppCompatActivity(), UsersAdapter.ClickListener {
 
     private lateinit var binding: ActivityMainBinding
